@@ -86,3 +86,5 @@ print('----')
 print('packed_native', len(packed_native))
 print('packed_str   ', len(packed_str))
 print('json         ', len(json.dumps(payload_str)))
+
+header = b'TIS1STA2'  # Tail origin service name [:3] - Tail message ver [3:4] - Client service name - Client ver (if any)
