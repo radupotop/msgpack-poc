@@ -6,16 +6,16 @@ import json
 def encoder(obj):
     """Encoder for custom data types"""
     if isinstance(obj, datetime):
-        return {'__dt__': True, 'fmt': obj.timestamp()}  # unix timestamp, float
+        return {'@dt': True, '#': obj.timestamp()}  # unix timestamp, float
     elif isinstance(obj, UUID):
-        return {'__uid__': True, 'fmt': obj.bytes}  # bytes
+        return {'@uid': True, '#': obj.bytes}  # bytes
     return obj
 
 def decoder(obj):
-    if '__dt__' in obj:
-        obj = datetime.fromtimestamp(obj["fmt"])
-    elif '__uid__' in obj:
-        obj = UUID(bytes=obj["fmt"])
+    if '@dt' in obj:
+        obj = datetime.fromtimestamp(obj['#'])
+    elif '@uid' in obj:
+        obj = UUID(bytes=obj['#'])
     return obj
 
 payload_native = {'webhookEventUid': UUID('cbd5d458-ffa9-49d3-9d5a-0007bb913765'),
